@@ -1,0 +1,13 @@
+[package]
+name = "researchcode-dev-tools"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+researchcode-kernel = { path = "../kernel" }
+researchcode-runtime = { path = "../runtime" }
+
+[[bin]]
+name = "researchcode-dev-tools"
+path = "src/main.rs"

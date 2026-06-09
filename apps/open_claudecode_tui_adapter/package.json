@@ -1,0 +1,9 @@
+{
+  "name": "open-claudecode-tui-adapter",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "researchcode-open-tui": "./cli.mjs"
+  }
+}

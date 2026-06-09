@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/kernel/plan_approval_decision.schema.json",
+  "title": "PlanApprovalDecision",
+  "type": "object",
+  "required": ["decision_id", "schema_version", "plan_approval_id", "decision", "decided_by", "request_hash"],
+  "additionalProperties": false,
+  "properties": {
+    "decision_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "plan_approval_id": {"type": "string"},
+    "decision": {"type": "string", "enum": ["approve", "reject", "request_revision"]},
+    "decided_by": {"type": "string", "enum": ["user", "policy"]},
+    "revision_request": {"type": "string"},
+    "reason": {"type": "string"},
+    "request_hash": {"type": "string"}
+  }
+}
+

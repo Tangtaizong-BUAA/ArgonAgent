@@ -1,0 +1,111 @@
+[
+  {
+    "id": "QW-PARSE-01",
+    "raw_output": {"reasoning": "Need exact file.", "tool_calls": [{"name": "file.read", "arguments": {"path": "src/parser.ts"}}]},
+    "expected_action": "execute",
+    "expected_tool_id": "file.read",
+    "expected_args": {"path": "src/parser.ts"},
+    "required_capability": "qwen3_reasoning_parser",
+    "confidence": "high"
+  },
+  {
+    "id": "QW-PARSE-02",
+    "raw_output": {"tool_calls": [{"name": "patch.propose", "arguments": {"path": "src/parser.ts", "old_string": "a", "new_string": "b"}}]},
+    "expected_action": "execute",
+    "expected_tool_id": "patch.propose",
+    "expected_args": {"path": "src/parser.ts", "old_string": "a", "new_string": "b"},
+    "required_capability": "qwen3_coder_tool_parser",
+    "confidence": "high"
+  },
+  {
+    "id": "QW-PARSE-03",
+    "raw_output": "<tool_call>{\"name\":\"file.read\",\"arguments\":{\"path\":\"src/parser.ts\"}}</tool_call>",
+    "expected_action": "execute_if_qwen_template_declared",
+    "expected_tool_id": "file.read",
+    "expected_args": {"path": "src/parser.ts"},
+    "required_capability": "qwen_chat_template",
+    "confidence": "medium"
+  },
+  {
+    "id": "QW-PARSE-04",
+    "raw_output": {"tool_calls": [{"name": "file.edit.now", "arguments": {"path": "src/parser.ts"}}]},
+    "expected_action": "retry",
+    "expected_tool_id": null,
+    "expected_args": null,
+    "required_capability": "qwen3_coder_tool_parser",
+    "confidence": "low"
+  },
+  {
+    "id": "QW-PARSE-05",
+    "raw_output": {"tool_calls": [{"name": "patch.propose", "arguments": {"path": "src/does_not_exist.ts", "old_string": "a", "new_string": "b"}}]},
+    "expected_action": "execute_then_patch_validator_blocks_missing_file",
+    "expected_tool_id": "patch.propose",
+    "expected_args": {"path": "src/does_not_exist.ts", "old_string": "a", "new_string": "b"},
+    "required_capability": "qwen3_coder_tool_parser",
+    "confidence": "high"
+  },
+  {
+    "id": "QW-PARSE-06",
+    "raw_output": {"thinking": "Simple status only.", "content": "Done."},
+    "expected_action": "no_tool",
+    "expected_tool_id": null,
+    "expected_args": null,
+    "required_capability": "non_thinking_allowed",
+    "confidence": "high"
+  },
+  {
+    "id": "QW-PARSE-07",
+    "raw_output": {"reasoning": "Need to inspect .env", "tool_calls": [{"name": "file.read", "arguments": {"path": ".env"}}]},
+    "expected_action": "permission_required_then_deny_by_policy",
+    "expected_tool_id": "file.read",
+    "expected_args": {"path": ".env"},
+    "required_capability": "qwen3_reasoning_parser",
+    "confidence": "high"
+  },
+  {
+    "id": "QW-PARSE-08",
+    "raw_output": {"tool_calls": [{"name": "shell.command", "arguments": {"command": "npm install lodash"}}]},
+    "expected_action": "permission_required_package_install",
+    "expected_tool_id": "shell.command",
+    "expected_args": {"command": "npm install lodash"},
+    "required_capability": "qwen3_coder_tool_parser",
+    "confidence": "high"
+  },
+  {
+    "id": "QW-PARSE-09",
+    "raw_output": {"tool_calls": [{"name": "patch.propose", "arguments": "{\"path\":\"src/parser.ts\",\"old_string\":\"a\",\"new_string\":\"b\",}"}]},
+    "expected_action": "repair_then_execute",
+    "expected_tool_id": "patch.propose",
+    "expected_args": {"path": "src/parser.ts", "old_string": "a", "new_string": "b"},
+    "required_capability": "qwen3_coder_tool_parser",
+    "confidence": "medium"
+  },
+  {
+    "id": "QW-PARSE-10",
+    "raw_output": {"deployment": {"model": "Qwen2-7B"}, "tool_calls": [{"name": "file.read", "arguments": {"path": "src/parser.ts"}}]},
+    "expected_action": "block_native_session",
+    "expected_tool_id": null,
+    "expected_args": null,
+    "required_capability": "qwen36_checkpoint_verified",
+    "confidence": "high"
+  },
+  {
+    "id": "QW-EXEC-01",
+    "raw_output": {"tool_calls": [{"name": "patch.propose", "arguments": {"path": "src/parser.ts", "old_string": "old", "new_string": "new"}}]},
+    "expected_action": "execute_only_after_file_read_hash",
+    "expected_tool_id": "patch.propose",
+    "expected_args": {"path": "src/parser.ts", "old_string": "old", "new_string": "new"},
+    "required_capability": "stale_file_detection",
+    "confidence": "high"
+  },
+  {
+    "id": "QW-EXEC-02",
+    "raw_output": {"tool_calls": [{"name": "patch.propose", "arguments": {"path": "src/parser.ts", "old_string": "helper()", "new_string": "helper2()"}}]},
+    "expected_action": "patch_validator_must_reject_ambiguous_match",
+    "expected_tool_id": "patch.propose",
+    "expected_args": {"path": "src/parser.ts", "old_string": "helper()", "new_string": "helper2()"},
+    "required_capability": "patch_sized_edit",
+    "confidence": "high"
+  }
+]
+

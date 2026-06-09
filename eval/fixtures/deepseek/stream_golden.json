@@ -1,0 +1,52 @@
+[
+  {
+    "id": "DS-STREAM-01",
+    "description": "reasoning_content is sanitized and separated from visible content",
+    "lines": [
+      "data: {\"choices\":[{\"delta\":{\"reasoning_content\":\"Need sk-testsecret from .env\"}}]}",
+      "data: {\"choices\":[{\"delta\":{\"content\":\"Visible answer\"}}]}",
+      "data: [DONE]"
+    ],
+    "expected": {
+      "valid": true,
+      "reasoning_sanitized": "Need [REDACTED_SECRET] from [REDACTED_PATH]",
+      "content": "Visible answer",
+      "tool_name": null,
+      "tool_arguments": "",
+      "done": true
+    }
+  },
+  {
+    "id": "DS-STREAM-02",
+    "description": "tool call name and arguments can arrive as separate fragments",
+    "lines": [
+      "data: {\"choices\":[{\"delta\":{\"tool_calls\":[{\"function\":{\"name\":\"file.read\",\"arguments\":\"{\\\"path\\\":\"}}]}}]}",
+      "data: {\"choices\":[{\"delta\":{\"tool_calls\":[{\"function\":{\"arguments\":\"\\\"src/parser.ts\\\"}\"}}]}}]}"
+    ],
+    "expected": {
+      "valid": true,
+      "reasoning_sanitized": "",
+      "content": "",
+      "tool_name": "file.read",
+      "tool_arguments": "{\"path\":\"src/parser.ts\"}",
+      "done": false
+    }
+  },
+  {
+    "id": "DS-STREAM-03",
+    "description": "usage telemetry captures prefix cache hit and miss tokens",
+    "lines": [
+      "data: {\"usage\":{\"prompt_tokens\":100,\"completion_tokens\":20,\"reasoning_tokens\":15,\"prompt_cache_hit_tokens\":80,\"prompt_cache_miss_tokens\":20}}"
+    ],
+    "expected": {
+      "valid": true,
+      "telemetry": {
+        "prompt_tokens": 100,
+        "completion_tokens": 20,
+        "reasoning_tokens": 15,
+        "prompt_cache_hit_tokens": 80,
+        "prompt_cache_miss_tokens": 20
+      }
+    }
+  }
+]

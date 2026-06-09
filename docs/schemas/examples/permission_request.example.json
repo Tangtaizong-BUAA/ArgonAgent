@@ -1,0 +1,17 @@
+{
+  "permission_id": "perm_001",
+  "schema_version": "v0",
+  "session_id": "sess_001",
+  "request_type": "command",
+  "raw_request": {
+    "command": "npm test -- parser",
+    "cwd": "/workspace/project"
+  },
+  "normalized_summary": "Run parser tests in the current project.",
+  "affected_paths": [],
+  "data_privacy_classes": ["internal"],
+  "risk_level": "low",
+  "matched_policy_rules": ["allow_non_destructive_test_command"],
+  "request_hash": "hash_permission_request_001"
+}
+

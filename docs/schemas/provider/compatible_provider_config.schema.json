@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/provider/compatible_provider_config.schema.json",
+  "title": "CompatibleProviderConfig",
+  "type": "object",
+  "required": ["provider_id", "schema_version", "display_name", "protocol", "base_url", "actual_model_name", "display_model_name", "health_check", "enabled_by_default", "optimization_level"],
+  "additionalProperties": false,
+  "properties": {
+    "provider_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "display_name": {"type": "string"},
+    "protocol": {"type": "string", "enum": ["openai_compatible", "anthropic_compatible", "custom"]},
+    "base_url": {"type": "string"},
+    "api_key_env": {"type": "string"},
+    "actual_model_name": {"type": "string", "minLength": 1},
+    "display_model_name": {"type": "string", "minLength": 1},
+    "model_alias": {"type": "string"},
+    "headers": {"type": "object", "additionalProperties": {"type": "string"}},
+    "capability_hints": {"type": "object"},
+    "request_transform": {"type": "object"},
+    "response_transform": {"type": "object"},
+    "health_check": {"type": "object"},
+    "enabled_by_default": {"type": "boolean"},
+    "optimization_level": {"type": "string", "enum": ["compatible", "baseline"]}
+  }
+}
+

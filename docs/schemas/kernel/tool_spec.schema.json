@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/kernel/tool_spec.schema.json",
+  "title": "ToolSpec",
+  "type": "object",
+  "required": ["tool_id", "schema_version", "display_name", "version", "description", "input_schema", "read_only", "destructive", "required_capabilities", "permission_policy", "model_exposure", "output_budget"],
+  "additionalProperties": false,
+  "properties": {
+    "tool_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "display_name": {"type": "string"},
+    "version": {"type": "string"},
+    "description": {"type": "string"},
+    "input_schema": {"type": "object"},
+    "output_schema": {"type": "object"},
+    "read_only": {"oneOf": [{"type": "boolean"}, {"const": "dynamic"}]},
+    "destructive": {"oneOf": [{"type": "boolean"}, {"const": "dynamic"}]},
+    "required_capabilities": {"type": "array", "items": {"type": "string"}},
+    "permission_policy": {"type": "string", "enum": ["always", "never", "dynamic"]},
+    "model_exposure": {
+      "type": "object",
+      "required": ["deepseek", "qwen"],
+      "properties": {
+        "deepseek": {"type": "string", "enum": ["native", "hidden", "wrapped"]},
+        "qwen": {"type": "string", "enum": ["native", "hidden", "wrapped"]}
+      }
+    },
+    "output_budget": {
+      "type": "object",
+      "required": ["max_inline_bytes", "spill_to_artifact"],
+      "properties": {
+        "max_inline_bytes": {"type": "integer", "minimum": 0},
+        "spill_to_artifact": {"type": "boolean"}
+      }
+    }
+  }
+}
+

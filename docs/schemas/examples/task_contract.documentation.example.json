@@ -1,0 +1,41 @@
+{
+  "task_id": "phase0-doc-schema",
+  "schema_version": "v0",
+  "goal": "Create Phase 0 schema drafts and examples.",
+  "scope": "Documentation and schema files only.",
+  "allowed_paths": ["docs/schemas/", "docs/prototypes/"],
+  "denied_paths": [".env", "~/.ssh", "src/", "crates/", "package-lock.json"],
+  "allowed_tools": ["read", "rg", "apply_patch", "python_text_check"],
+  "denied_tools": ["network", "package_install", "destructive_shell"],
+  "shell_policy": {
+    "allow_non_destructive_checks": true,
+    "allow_build_or_test": false,
+    "allow_package_managers": false,
+    "deny_patterns": ["rm", "git reset", "git push"],
+    "require_approval_patterns": []
+  },
+  "network_policy": {"mode": "disabled"},
+  "package_install_policy": {"mode": "deny"},
+  "cloud_model_policy": {
+    "allow_native_deepseek": false,
+    "allow_native_qwen": false,
+    "allow_compatible_provider": "never",
+    "sensitive_data_requires_approval": true
+  },
+  "max_duration_minutes": 180,
+  "max_retries": 1,
+  "max_parallel_agents": 1,
+  "required_tests": ["python3 scripts/validate_kernel_schemas.py"],
+  "required_artifacts": ["docs/schemas/"],
+  "stop_conditions": ["requires network", "requires product code", "requires dependency install"],
+  "reviewer_required": false,
+  "integrator_required": false,
+  "final_report_format": {
+    "changed_files": true,
+    "tests_run": true,
+    "risks": true,
+    "unresolved_questions": true,
+    "next_tasks": true
+  }
+}
+

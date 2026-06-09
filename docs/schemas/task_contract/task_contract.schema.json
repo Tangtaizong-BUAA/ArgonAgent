@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/task_contract/task_contract.schema.json",
+  "title": "TaskContract",
+  "type": "object",
+  "required": ["task_id", "schema_version", "goal", "scope", "allowed_paths", "denied_paths", "allowed_tools", "denied_tools", "shell_policy", "network_policy", "package_install_policy", "cloud_model_policy", "max_duration_minutes", "max_retries", "max_parallel_agents", "required_tests", "required_artifacts", "stop_conditions", "reviewer_required", "integrator_required", "final_report_format"],
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "goal": {"type": "string"},
+    "scope": {"type": "string"},
+    "allowed_paths": {"type": "array", "items": {"type": "string"}},
+    "denied_paths": {"type": "array", "items": {"type": "string"}},
+    "allowed_tools": {"type": "array", "items": {"type": "string"}},
+    "denied_tools": {"type": "array", "items": {"type": "string"}},
+    "shell_policy": {"type": "object"},
+    "network_policy": {"type": "object"},
+    "package_install_policy": {"type": "object"},
+    "cloud_model_policy": {"type": "object"},
+    "max_duration_minutes": {"type": "integer", "minimum": 1},
+    "max_retries": {"type": "integer", "minimum": 0},
+    "max_parallel_agents": {"type": "integer", "minimum": 1},
+    "required_tests": {"type": "array", "items": {"type": "string"}},
+    "required_artifacts": {"type": "array", "items": {"type": "string"}},
+    "stop_conditions": {"type": "array", "items": {"type": "string"}},
+    "reviewer_required": {"type": "boolean"},
+    "integrator_required": {"type": "boolean"},
+    "final_report_format": {"type": "object"}
+  }
+}

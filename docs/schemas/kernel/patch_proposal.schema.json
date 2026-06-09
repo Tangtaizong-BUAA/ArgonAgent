@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/kernel/patch_proposal.schema.json",
+  "title": "PatchProposal",
+  "type": "object",
+  "required": ["patch_id", "schema_version", "session_id", "base_snapshot", "target_paths", "intent", "hunks", "rendered_diff_artifact_id", "risk_level", "requires_approval", "validation"],
+  "additionalProperties": false,
+  "properties": {
+    "patch_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "session_id": {"type": "string"},
+    "base_snapshot": {
+      "type": "object",
+      "required": ["file_hashes"],
+      "properties": {
+        "commit": {"type": "string"},
+        "file_hashes": {"type": "object", "additionalProperties": {"type": "string"}}
+      }
+    },
+    "target_paths": {"type": "array", "items": {"type": "string"}},
+    "intent": {"type": "string"},
+    "hunks": {"type": "array", "items": {"type": "object"}},
+    "rendered_diff_artifact_id": {"type": "string"},
+    "risk_level": {"type": "string", "enum": ["low", "medium", "high"]},
+    "requires_approval": {"type": "boolean"},
+    "validation": {
+      "type": "object",
+      "required": ["base_hash_ok", "paths_allowed", "ambiguous", "conflicts"],
+      "properties": {
+        "base_hash_ok": {"type": "boolean"},
+        "paths_allowed": {"type": "boolean"},
+        "ambiguous": {"type": "boolean"},
+        "conflicts": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}
+

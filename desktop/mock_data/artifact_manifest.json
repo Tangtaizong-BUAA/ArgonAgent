@@ -1,0 +1,13 @@
+{
+  "schema_version": "artifact_manifest.v0",
+  "artifacts": [
+    {
+      "artifact_id": "artifact_demo_profile",
+      "kind": "data_profile",
+      "content_hash": "fnv64_demo",
+      "size_bytes": 1024,
+      "privacy_class": "internal",
+      "relative_path": "sha256/de/demo-profile"
+    }
+  ]
+}

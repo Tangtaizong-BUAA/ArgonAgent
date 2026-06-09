@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/kernel/permission_decision.schema.json",
+  "title": "PermissionDecision",
+  "type": "object",
+  "required": ["decision_id", "schema_version", "permission_id", "decision", "decided_by", "request_hash"],
+  "additionalProperties": false,
+  "properties": {
+    "decision_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "permission_id": {"type": "string"},
+    "decision": {"type": "string", "enum": ["allow_once", "allow_session", "allow_project_rule", "deny", "modify"]},
+    "decided_by": {"type": "string", "enum": ["user", "policy"]},
+    "scope": {},
+    "reason": {"type": "string"},
+    "request_hash": {"type": "string"}
+  }
+}
+
