@@ -1,8 +1,8 @@
-# DeepCode / ResearchCode Coworker
+# ArgonAgent
 
 一个本地优先的 AI Agent 工作台。
 
-简单说：我们想做一个更懂 DeepSeek 和 Qwen 的本地 AI 工作伙伴。它不只是把模型 API
+简单说：我想做一个更懂 DeepSeek 和 Qwen 的本地 AI 工作伙伴。它不只是把模型 API
 接进来聊聊天，而是从运行时、上下文、工具调用、权限、桌面交互到评测体系，一层一层把
 DeepSeek/Qwen 当成一等公民来优化。
 
@@ -15,7 +15,7 @@ DeepSeek/Qwen 当成一等公民来优化。
 现在很多 Agent 工具都能“接模型、跑命令、改文件”，但不同模型的思考方式、上下文习惯、
 工具调用格式和流式输出细节其实差很多。
 
-DeepCode 的方向是：
+ArgonAgent 的方向是：
 
 - 像 Claude Code 一样能在本地仓库里认真干活。
 - 像 Codex GUI 一样有一个清楚的桌面命令中心。
