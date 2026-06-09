@@ -1,0 +1,34 @@
+[
+  {
+    "id": "SCF-CMP-QW-01",
+    "comparison": "qwen_lite_vs_full",
+    "family": "qwen",
+    "role": "executor",
+    "expected_winner": "qwen_lite",
+    "reason": "Qwen executor must keep prompt scaffold below 10 percent, active tools narrow, and reasoning replay disabled instead of inheriting DeepSeek full scaffold."
+  },
+  {
+    "id": "SCF-CMP-QW-02",
+    "comparison": "qwen_guarded_vs_full",
+    "family": "qwen",
+    "role": "planner",
+    "expected_winner": "qwen_guarded",
+    "reason": "Qwen planner may use guarded thinking but must still avoid DeepSeek reasoning replay and broader native tool budgets."
+  },
+  {
+    "id": "SCF-CMP-DS-01",
+    "comparison": "deepseek_full_vs_lite",
+    "family": "deepseek",
+    "role": "planner",
+    "expected_winner": "deepseek_full",
+    "reason": "DeepSeek planner should preserve the ClaudeCode-like scaffold with reasoning replay, cache strategy, and live context guard under the 256K safety cap."
+  },
+  {
+    "id": "SCF-CMP-DS-02",
+    "comparison": "deepseek_full_vs_lite",
+    "family": "deepseek",
+    "role": "reviewer",
+    "expected_winner": "deepseek_full",
+    "reason": "DeepSeek reviewer needs enough tool/file context and protected reserves for multi-step long-task review while staying under the 256K safety cap."
+  }
+]

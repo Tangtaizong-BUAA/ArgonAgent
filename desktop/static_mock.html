@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ResearchCode Coworker Mock</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f8fa;
+        --panel: #ffffff;
+        --text: #1c2430;
+        --muted: #637083;
+        --line: #d8dee8;
+        --accent: #0f766e;
+        --risk: #b42318;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+      header {
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        border-bottom: 1px solid var(--line);
+        background: var(--panel);
+      }
+      main {
+        display: grid;
+        grid-template-columns: 280px minmax(420px, 1fr) 360px;
+        gap: 1px;
+        min-height: calc(100vh - 57px);
+        background: var(--line);
+      }
+      section {
+        background: var(--panel);
+        padding: 16px;
+        overflow: auto;
+      }
+      h1, h2, h3 {
+        margin: 0;
+        letter-spacing: 0;
+      }
+      h1 {
+        font-size: 16px;
+      }
+      h2 {
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+      .model {
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .task {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .repo-map,
+      .tool-catalog {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        margin-top: 14px;
+        padding: 10px;
+      }
+      .repo-map strong,
+      .tool-catalog strong {
+        display: block;
+        font-size: 13px;
+      }
+      .repo-map code,
+      .tool-catalog code {
+        background: #f1f4f8;
+        border-radius: 6px;
+        display: block;
+        font-size: 12px;
+        margin-top: 8px;
+        max-height: 220px;
+        overflow: auto;
+        padding: 8px;
+        white-space: pre-wrap;
+      }
+      .task strong {
+        display: block;
+        font-size: 13px;
+      }
+      .task span, .event small {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 8px;
+        min-width: 0;
+      }
+      .metric strong {
+        display: block;
+        font-size: 18px;
+      }
+      .metric span {
+        color: var(--muted);
+        display: block;
+        font-size: 12px;
+        overflow-wrap: anywhere;
+      }
+      .event {
+        border-left: 3px solid var(--line);
+        padding: 8px 0 8px 12px;
+        margin-bottom: 6px;
+      }
+      .event.approval {
+        border-color: var(--accent);
+      }
+      .event.permission {
+        border-color: var(--risk);
+      }
+      .model-stream {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px;
+        margin: 0 0 10px;
+      }
+      .workflow-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .workflow-item {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        min-width: 0;
+        padding: 10px;
+      }
+      .workflow-item strong {
+        display: block;
+        font-size: 13px;
+        overflow-wrap: anywhere;
+      }
+      .workflow-item small {
+        color: var(--muted);
+        display: block;
+        font-size: 12px;
+        margin-top: 4px;
+        overflow-wrap: anywhere;
+      }
+      .model-stream strong {
+        display: block;
+        font-size: 13px;
+      }
+      .model-stream small {
+        color: var(--muted);
+        display: block;
+        font-size: 12px;
+        margin-top: 4px;
+      }
+      .model-delta {
+        background: #f1f4f8;
+        border-radius: 6px;
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 8px;
+        overflow-wrap: anywhere;
+        padding: 8px;
+      }
+      .drawer {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 12px;
+      }
+      .drawer code {
+        display: block;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        background: #f1f4f8;
+        border-radius: 6px;
+        padding: 8px;
+        margin-top: 8px;
+      }
+      button {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 7px 10px;
+        background: #ffffff;
+        color: var(--text);
+      }
+      button.primary {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>ResearchCode Coworker</h1>
+      <div class="model">Native: Qwen3.6-27B</div>
+    </header>
+    <main>
+      <section>
+        <h2>Tasks</h2>
+        <div class="task">
+          <strong>Fix parser test failure</strong>
+          <span>Session sess_001 · Completed</span>
+        </div>
+        <div class="task">
+          <strong>CSV quality profile</strong>
+          <span>Research Worker · Draft</span>
+        </div>
+        <div class="repo-map">
+          <h2>Project Map</h2>
+          <div id="repoMap"></div>
+        </div>
+        <div class="tool-catalog">
+          <h2>Tool Catalog</h2>
+          <div id="toolCatalog"></div>
+        </div>
+      </section>
+      <section>
+        <h2>Event Timeline</h2>
+        <div id="summary" class="summary"></div>
+        <h2>Model Timeline</h2>
+        <div id="modelTimeline"></div>
+        <h2>Workflow Panels</h2>
+        <div id="workflowPanels" class="workflow-grid"></div>
+        <h2>Recent Events</h2>
+        <div id="timeline"></div>
+      </section>
+      <section>
+        <h2>Review Drawers</h2>
+        <div class="drawer">
+          <h3>Plan Approval</h3>
+          <p>Task governance only. Does not authorize command/file/network actions.</p>
+          <button class="primary">Approve Plan</button>
+          <button>Request Revision</button>
+        </div>
+        <div class="drawer" id="permissionDrawer">
+          <h3>Permission Request</h3>
+          <p id="permissionDrawerText">Safety boundary for command/file/network/package/cloud/protected path.</p>
+          <code id="permissionDrawerCode">npm test -- parser</code>
+          <button class="primary">Allow Once</button>
+          <button>Deny</button>
+        </div>
+        <div class="drawer">
+          <h3>Cloud Model Approval</h3>
+          <p>Sensitive research columns detected. Cloud calls require explicit approval.</p>
+          <code>privacy_report: subject_email · sensitive_personal</code>
+          <button class="primary">Use Local Qwen</button>
+          <button>Approve Cloud Once</button>
+        </div>
+        <div class="drawer">
+          <h3>Diff Review</h3>
+          <code>src/parser.ts
+- retry_count = 3
++ retry_count = 5</code>
+          <button class="primary">Apply Patch</button>
+          <button>Reject</button>
+        </div>
+      </section>
+    </main>
+    <script type="module">
+      import { buildCommandCenterViewModel, getApprovalQueue, getEvents, getLatestRun, getRepoMap, getSummary, getToolCatalog, parseJsonl } from "./local_api_client.mjs";
+
+      const events = [
+        { event_type: "session.created", sequence: 1 },
+        { event_type: "message.user_created", sequence: 2 },
+        { event_type: "plan.proposed", sequence: 3 },
+        { event_type: "plan.approval_requested", sequence: 4 },
+        { event_type: "plan.approval_decided", sequence: 5 },
+        { event_type: "permission.requested", sequence: 6 },
+        { event_type: "permission.decided", sequence: 7 },
+        { event_type: "patch.applied", sequence: 8 },
+        { event_type: "tool.call_completed", sequence: 9 },
+        { event_type: "session.completed", sequence: 10 }
+      ];
+      const timeline = document.getElementById("timeline");
+      const modelTimeline = document.getElementById("modelTimeline");
+      const workflowPanels = document.getElementById("workflowPanels");
+      const repoMap = document.getElementById("repoMap");
+      const toolCatalog = document.getElementById("toolCatalog");
+      const summary = document.getElementById("summary");
+      const permissionDrawerText = document.getElementById("permissionDrawerText");
+      const permissionDrawerCode = document.getElementById("permissionDrawerCode");
+      function renderSummary(viewModel) {
+        summary.innerHTML = "";
+        [
+          ["Events", viewModel.eventCount],
+          ["Latest", viewModel.latestEventType],
+          ["Tools", Object.values(viewModel.toolCounts || {}).reduce((sum, value) => sum + value, 0)],
+          ["Models", viewModel.modelTimeline?.callCount || 0]
+        ].forEach(([label, value]) => {
+          const node = document.createElement("div");
+          node.className = "metric";
+          node.innerHTML = `<strong>${value}</strong><span>${label}</span>`;
+          summary.appendChild(node);
+        });
+      }
+      function renderEvents(items) {
+        timeline.innerHTML = "";
+        items.forEach((event, index) => {
+          const eventType = event.event_type || event;
+          const sequence = event.sequence || index + 1;
+          const node = document.createElement("div");
+          node.className = "event" + (eventType.includes("approval") ? " approval" : "") + (eventType.includes("permission") ? " permission" : "");
+          node.innerHTML = `<strong>${eventType}</strong><br><small>#${sequence}</small>`;
+          timeline.appendChild(node);
+        });
+      }
+      function renderModelTimeline(viewModel) {
+        modelTimeline.innerHTML = "";
+        const streams = viewModel.modelTimeline?.streams || [];
+        const callsByProvider = Object.fromEntries(
+          (viewModel.modelTimeline?.calls || []).map(call => [call.provider, call])
+        );
+        if (!streams.length) {
+          const empty = document.createElement("div");
+          empty.className = "model-stream";
+          empty.innerHTML = "<strong>No model stream yet</strong><small>Run recorded-live-response or native-response-adapter fixture to populate this panel.</small>";
+          modelTimeline.appendChild(empty);
+          return;
+        }
+        streams.forEach(stream => {
+          const call = callsByProvider[stream.provider] || {};
+          const reasoning = stream.tokens?.reasoning || 0;
+          const cacheHit = stream.tokens?.promptCacheHit || stream.tokens?.prompt_cache_hit || 0;
+          const node = document.createElement("div");
+          node.className = "model-stream";
+          const deltas = (stream.deltas || []).map(delta => {
+            const label = delta.kind === "content" ? "content" : `${delta.kind || "delta"}`;
+            return `<div class="model-delta">${label}: ${escapeHtml(delta.preview || "")}</div>`;
+          }).join("");
+          node.innerHTML = `
+            <strong>${stream.provider || "model"} · ${call.status || stream.status || "running"}</strong>
+            <small>${call.actualModelName || call.actual_model_name || ""} · artifact ${stream.artifactId || stream.artifact_id || "-"}</small>
+            <small>tokens prompt=${stream.tokens?.prompt || 0} completion=${stream.tokens?.completion || 0} reasoning=${reasoning} cache_hit=${cacheHit}</small>
+            ${deltas}
+          `;
+          modelTimeline.appendChild(node);
+        });
+      }
+      function renderWorkflowPanels(viewModel) {
+        workflowPanels.innerHTML = "";
+        const panels = viewModel.workflowPanels || { tools: [], permissions: [], patches: [], commands: [] };
+        [
+          ["Tools", panels.tools.map(item => `${item.toolId || item.toolCallId} · ${item.status}`)],
+          ["Permissions", panels.permissions.map(item => `${item.requestType || item.permissionId} · ${item.status}`)],
+          ["Patches", panels.patches.map(item => `${item.patchId} · ${item.status}`)],
+          ["Commands", panels.commands.map(item => `${item.toolCallId} · ${item.status}`)]
+        ].forEach(([title, rows]) => {
+          const node = document.createElement("div");
+          node.className = "workflow-item";
+          const body = rows.length
+            ? rows.slice(0, 4).map(row => `<small>${escapeHtml(row)}</small>`).join("")
+            : "<small>none</small>";
+          node.innerHTML = `<strong>${title}</strong>${body}`;
+          workflowPanels.appendChild(node);
+        });
+      }
+      function renderRepoMap(viewModel) {
+        const map = viewModel.repoMap;
+        if (!map) {
+          repoMap.innerHTML = "<strong>No repo map loaded</strong><span>Start the local API to inspect project structure.</span>";
+          return;
+        }
+        const stack = (map.tech_stack || map.techStack || []).join(", ") || "unknown";
+        const files = map.file_count ?? map.fileCount ?? 0;
+        const omitted = map.omitted_count ?? map.omittedCount ?? 0;
+        const important = (map.important_files || map.importantFiles || []).slice(0, 6).join("\n");
+        const tree = (map.tree || []).slice(0, 18).join("\n");
+        repoMap.innerHTML = `
+          <strong>${escapeHtml(stack)}</strong>
+          <span>${files} files · ${omitted} omitted</span>
+          <code>${escapeHtml(important || tree || "empty")}</code>
+        `;
+      }
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, ch => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[ch]);
+      }
+      function renderToolCatalog(viewModel) {
+        const catalog = viewModel.toolCatalog;
+        if (!catalog) {
+          toolCatalog.innerHTML = "<strong>No tools loaded</strong><span>Start the local API to inspect ToolSpec.</span>";
+          return;
+        }
+        const rows = (catalog.tools || []).slice(0, 10).map(tool => {
+          const approval = tool.permission_required ? "approval" : "auto";
+          return `${tool.tool_id} · ${tool.risk} · ${approval}`;
+        }).join("\n");
+        toolCatalog.innerHTML = `
+          <strong>${catalog.tool_count || 0} tools · ${catalog.permission_required_count || 0} gated</strong>
+          <span>${escapeHtml(catalog.version || "unknown")}</span>
+          <code>${escapeHtml(rows || "empty")}</code>
+        `;
+      }
+      function renderCommandCenter(items, summaryPayload = null, repoMapPayload = null, toolCatalogPayload = null) {
+        const viewModel = buildCommandCenterViewModel(items, summaryPayload, repoMapPayload, toolCatalogPayload);
+        renderSummary(viewModel);
+        renderModelTimeline(viewModel);
+        renderWorkflowPanels(viewModel);
+        renderRepoMap(viewModel);
+        renderToolCatalog(viewModel);
+        renderEvents(viewModel.recentEvents);
+      }
+      function renderApprovalQueue(items) {
+        const viewModel = buildCommandCenterViewModel(items);
+        renderApprovalQueuePayload({
+          permissions: viewModel.workflowPanels?.permissions || [],
+          patches: viewModel.workflowPanels?.patches || [],
+          latest_pending: (viewModel.workflowPanels?.permissions || []).find(item => item.status === "requested") || null,
+        });
+      }
+      function renderApprovalQueuePayload(queue) {
+        const permissions = queue.permissions || [];
+        const patches = queue.patches || [];
+        const pending = permissions.find(item => item.status === "requested");
+        if (!pending) {
+          permissionDrawerText.textContent = "No pending permission request in the latest approval fixture.";
+          permissionDrawerCode.textContent = "permission queue empty";
+          return;
+        }
+        const patch = patches.find(item => item.status === "validated") || patches[0];
+        permissionDrawerText.textContent = `Pending ${pending.requestType || "permission"} request at event #${pending.sequence}.`;
+        permissionDrawerCode.textContent = patch?.path
+          ? `${pending.permissionId}\n${patch.path}\n${patch.validation || patch.status}`
+          : pending.permissionId;
+      }
+      renderCommandCenter(events);
+      const params = new URLSearchParams(window.location.search);
+      const apiBase = params.get("api") || (window.location.protocol.startsWith("http") ? window.location.origin : null);
+      const eventPath = params.get("events") || "apps/desktop/mock_data/events.jsonl";
+      if (apiBase) {
+        getLatestRun(fetch, apiBase)
+          .catch(() => null)
+          .then(latest => {
+            const selectedEventPath = params.get("events") || latest?.live_transport_agent_loop_events || latest?.agent_loop_events || eventPath;
+            const blockedPermissionPath = latest?.blocked_permission_events;
+            return Promise.all([
+              getEvents(fetch, apiBase, selectedEventPath),
+              getSummary(fetch, apiBase, selectedEventPath).catch(() => null),
+              getRepoMap(fetch, apiBase).catch(() => null),
+              getToolCatalog(fetch, apiBase).catch(() => null),
+              getApprovalQueue(fetch, apiBase, blockedPermissionPath).catch(() => null),
+              blockedPermissionPath ? getEvents(fetch, apiBase, blockedPermissionPath).catch(() => []) : Promise.resolve([])
+            ]);
+          })
+          .then(([items, summaryPayload, repoMapPayload, toolCatalogPayload, approvalQueue, blockedItems]) => {
+            renderCommandCenter(items, summaryPayload, repoMapPayload, toolCatalogPayload);
+            if (approvalQueue) {
+              renderApprovalQueuePayload(approvalQueue);
+            } else {
+              renderApprovalQueue(blockedItems);
+            }
+          })
+          .catch(() => {});
+      } else {
+        fetch("mock_data/model_events.jsonl")
+          .then(response => response.ok ? response.text() : Promise.reject(new Error("mock data unavailable")))
+          .then(text => renderCommandCenter(parseJsonl(text)))
+          .catch(() => {});
+      }
+    </script>
+  </body>
+</html>

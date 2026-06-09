@@ -1,0 +1,65 @@
+[
+  {
+    "id": "QW-STREAM-01",
+    "description": "canonical Qwen3.6-27B stream separates thinking and visible content",
+    "lines": [
+      "data: {\"model\":\"Qwen/Qwen3.6-27B\",\"choices\":[{\"delta\":{\"reasoning_content\":\"Need sk-testsecret from .env\"}}]}",
+      "data: {\"choices\":[{\"delta\":{\"content\":\"Visible answer\"}}]}",
+      "data: [DONE]"
+    ],
+    "expected": {
+      "valid": true,
+      "deployment_model": "Qwen/Qwen3.6-27B",
+      "thinking_sanitized": "Need [REDACTED_SECRET] from [REDACTED_PATH]",
+      "content": "Visible answer",
+      "tool_name": null,
+      "tool_arguments": "",
+      "done": true
+    }
+  },
+  {
+    "id": "QW-STREAM-02",
+    "description": "Qwen2/Qwen2-7B deployment cannot enter native stream path",
+    "lines": [
+      "data: {\"model\":\"Qwen/Qwen2-7B\",\"choices\":[{\"delta\":{\"content\":\"Wrong model\"}}]}"
+    ],
+    "expected": {
+      "valid": false,
+      "error_contains": "Qwen3.6-27B"
+    }
+  },
+  {
+    "id": "QW-STREAM-03",
+    "description": "Qwen tool call fragments are assembled independently",
+    "lines": [
+      "data: {\"model\":\"Qwen/Qwen3.6-27B\"}",
+      "data: {\"choices\":[{\"delta\":{\"tool_calls\":[{\"function\":{\"name\":\"patch.apply\",\"arguments\":\"{\\\"path\\\":\"}}]}}]}",
+      "data: {\"choices\":[{\"delta\":{\"tool_calls\":[{\"function\":{\"arguments\":\"\\\"src/lib.rs\\\"}\"}}]}}]}"
+    ],
+    "expected": {
+      "valid": true,
+      "deployment_model": "Qwen/Qwen3.6-27B",
+      "thinking_sanitized": "",
+      "content": "",
+      "tool_name": "patch.apply",
+      "tool_arguments": "{\"path\":\"src/lib.rs\"}",
+      "done": false
+    }
+  },
+  {
+    "id": "QW-STREAM-04",
+    "description": "Qwen usage telemetry is preserved",
+    "lines": [
+      "data: {\"model\":\"Qwen/Qwen3.6-27B\"}",
+      "data: {\"usage\":{\"prompt_tokens\":100,\"completion_tokens\":20,\"total_tokens\":120}}"
+    ],
+    "expected": {
+      "valid": true,
+      "telemetry": {
+        "prompt_tokens": 100,
+        "completion_tokens": 20,
+        "total_tokens": 120
+      }
+    }
+  }
+]

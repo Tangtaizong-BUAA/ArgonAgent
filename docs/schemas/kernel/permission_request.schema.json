@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/kernel/permission_request.schema.json",
+  "title": "PermissionRequest",
+  "type": "object",
+  "required": ["permission_id", "schema_version", "session_id", "request_type", "raw_request", "normalized_summary", "affected_paths", "data_privacy_classes", "risk_level", "matched_policy_rules", "request_hash"],
+  "additionalProperties": false,
+  "properties": {
+    "permission_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "session_id": {"type": "string"},
+    "request_type": {"type": "string", "enum": ["command", "file_write", "network", "package_install", "cloud_model", "protected_path", "artifact_export"]},
+    "raw_request": {},
+    "normalized_summary": {"type": "string"},
+    "affected_paths": {"type": "array", "items": {"type": "string"}},
+    "data_privacy_classes": {"type": "array", "items": {"type": "string", "enum": ["public", "internal", "confidential", "sensitive_personal", "secret"]}},
+    "risk_level": {"type": "string", "enum": ["low", "medium", "high", "blocked"]},
+    "matched_policy_rules": {"type": "array", "items": {"type": "string"}},
+    "expires_at": {"type": "string"},
+    "request_hash": {"type": "string"}
+  }
+}
+

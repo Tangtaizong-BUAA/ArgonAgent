@@ -1,0 +1,25 @@
+{
+  "plan_approval_id": "pa_001",
+  "schema_version": "v0",
+  "session_id": "sess_001",
+  "plan_id": "plan_001",
+  "plan_summary": "Fix failing parser test by reading the parser file, applying a small patch, and running tests.",
+  "planned_steps": [
+    {
+      "step_id": "step_1",
+      "title": "Inspect parser",
+      "intent": "Read relevant files and test failure output."
+    },
+    {
+      "step_id": "step_2",
+      "title": "Patch parser",
+      "intent": "Create a structured patch against the parser file."
+    }
+  ],
+  "expected_paths": ["src/parser.ts", "tests/parser.test.ts"],
+  "expected_commands": ["npm test -- parser"],
+  "model_profile_id": "qwen3.6-27b-thinking",
+  "governance_risk": "medium",
+  "request_hash": "hash_plan_request_001"
+}
+

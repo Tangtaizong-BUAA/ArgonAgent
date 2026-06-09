@@ -1,0 +1,52 @@
+{
+  "name": "researchcode-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "gui:smoke": "node gui_three_round_smoke.mjs",
+    "gui:smoke:headed": "node gui_three_round_smoke.mjs --headed",
+    "gui:real-runtime": "node gui_three_round_smoke.mjs --backend=rust --real-dialogue",
+    "gui:real-runtime:headed": "node gui_three_round_smoke.mjs --backend=rust --real-dialogue --headed",
+    "gui:live-runtime": "node gui_three_round_smoke.mjs --backend=rust --real-dialogue --live-provider",
+    "gui:live-runtime:headed": "node gui_three_round_smoke.mjs --backend=rust --real-dialogue --live-provider --headed",
+    "gui:incident-fixture": "node gui_three_round_smoke.mjs --incident-verify --incident-fixture-only",
+    "gui:incident-live": "node gui_three_round_smoke.mjs --backend=rust --incident-verify --live-provider --provider=deepseek",
+    "gui:incident-live:headed": "node gui_three_round_smoke.mjs --backend=rust --incident-verify --live-provider --provider=deepseek --headed",
+    "gui:toolstorm-latency": "node gui_toolstorm_latency_smoke.mjs",
+    "gui:toolstorm-latency:headed": "node gui_toolstorm_latency_smoke.mjs --headed",
+    "gui:permission-longtask": "node gui_permission_longtask_smoke.mjs",
+    "gui:permission-longtask:headed": "node gui_permission_longtask_smoke.mjs --headed",
+    "gui:conversation-quality": "node gui_conversation_quality_smoke.mjs",
+    "gui:conversation-quality:headed": "node gui_conversation_quality_smoke.mjs --headed",
+    "gui:full-regression": "node gui_full_stack_regression.mjs",
+    "gui:full-regression:headed": "node gui_full_stack_regression.mjs --headed",
+    "gui:argon-longtask-live": "node gui_argon_longtask_stress.mjs --provider=deepseek",
+    "gui:argon-longtask-live:headed": "node gui_argon_longtask_stress.mjs --provider=deepseek --headed",
+    "test:desktop-polish": "node test_desktop_polish_contract.mjs",
+    "test:runtime-event-replay": "node test_runtime_event_replay.mjs",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.509.0",
+    "playwright": "^1.59.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "@tauri-apps/cli": "^2.0.0",
+    "@types/react": "^19.1.3",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react": "^4.4.1",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^5.8.3",
+    "vite": "^7.3.3"
+  }
+}

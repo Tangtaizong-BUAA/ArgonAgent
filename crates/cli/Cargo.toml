@@ -1,0 +1,14 @@
+[package]
+name = "researchcode-cli"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+ctrlc = "3"
+researchcode-kernel = { path = "../kernel" }
+researchcode-runtime = { path = "../runtime" }
+
+[[bin]]
+name = "researchcode"
+path = "src/main.rs"

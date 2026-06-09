@@ -1,0 +1,7 @@
+subject_id,email,group,value,notes
+S001,alice@example.com,A,10,baseline
+S002,bob@example.com,A,,missing value
+S002,bob@example.com,A,,missing value
+S003,charlie@example.com,B,999,outlier
+S004,,B,12,missing email
+

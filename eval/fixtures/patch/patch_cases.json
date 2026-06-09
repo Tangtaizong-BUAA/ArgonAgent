@@ -1,0 +1,53 @@
+[
+  {
+    "id": "P-01",
+    "name": "exact-old-string",
+    "fixture_dir": "exact-old-string",
+    "path": "file.txt",
+    "old_string": "retry_count = 3",
+    "new_string": "retry_count = 5",
+    "base_hash": "__compute__",
+    "expected": "pass"
+  },
+  {
+    "id": "P-02",
+    "name": "ambiguous-match",
+    "fixture_dir": "ambiguous-match",
+    "path": "file.txt",
+    "old_string": "helper()",
+    "new_string": "helper_with_context()",
+    "base_hash": "__compute__",
+    "expected": "fail_ambiguous"
+  },
+  {
+    "id": "P-03",
+    "name": "stale-file",
+    "fixture_dir": "stale-file",
+    "path": "file.txt",
+    "old_string": "version = \"old\"",
+    "new_string": "version = \"new\"",
+    "base_hash": "intentionally_wrong_hash",
+    "expected": "fail_stale"
+  },
+  {
+    "id": "P-04",
+    "name": "generated-file",
+    "fixture_dir": "generated-file",
+    "path": "README.md",
+    "old_string": "",
+    "new_string": "# Generated Outputs\n\nThis folder stores generated outputs.\n",
+    "base_hash": "",
+    "expected": "pass_create"
+  },
+  {
+    "id": "P-05",
+    "name": "protected-path",
+    "fixture_dir": "protected-path",
+    "path": "../.ssh/config",
+    "old_string": "",
+    "new_string": "Host example\n",
+    "base_hash": "",
+    "expected": "fail_protected"
+  }
+]
+

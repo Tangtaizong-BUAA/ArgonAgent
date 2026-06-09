@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/kernel/eval_event.schema.json",
+  "title": "EvalEvent",
+  "type": "object",
+  "required": ["eval_run_id", "schema_version", "eval_case_id", "fixture_hash", "model_profile_id", "prompt_template_version", "parser_version", "event_id", "metric_name", "metric_value"],
+  "additionalProperties": false,
+  "properties": {
+    "eval_run_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "eval_case_id": {"type": "string"},
+    "fixture_hash": {"type": "string"},
+    "model_profile_id": {"type": "string"},
+    "prompt_template_version": {"type": "string"},
+    "parser_version": {"type": "string"},
+    "event_id": {"type": "string"},
+    "metric_name": {"type": "string"},
+    "metric_value": {},
+    "verdict": {"type": "string", "enum": ["pass", "fail", "warning"]}
+  }
+}
+

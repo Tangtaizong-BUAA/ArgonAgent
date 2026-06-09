@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/kernel/model_adapter_config.schema.json",
+  "title": "ModelAdapterConfig",
+  "type": "object",
+  "required": ["adapter_id", "schema_version", "profile_id", "optimization_level", "capabilities", "prompt_template_version", "parser_version"],
+  "additionalProperties": false,
+  "properties": {
+    "adapter_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "profile_id": {"type": "string", "enum": ["deepseek-v4-native", "qwen3.6-27b-native"]},
+    "optimization_level": {"type": "string", "const": "native"},
+    "capabilities": {"type": "object"},
+    "prompt_template_version": {"type": "string"},
+    "parser_version": {"type": "string"}
+  }
+}
+

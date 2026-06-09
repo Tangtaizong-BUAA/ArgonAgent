@@ -1,0 +1,9 @@
+{
+  "row_count": 5,
+  "column_count": 5,
+  "expected_missing_columns": ["email", "value"],
+  "expected_duplicate_rows": 1,
+  "expected_sensitive_columns": ["subject_id", "email"],
+  "expected_outlier_columns": ["value"]
+}
+

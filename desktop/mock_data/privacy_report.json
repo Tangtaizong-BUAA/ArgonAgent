@@ -1,0 +1,13 @@
+{
+  "artifact_kind": "privacy_report",
+  "source_path": "eval/fixtures/research/csv-quality-small/input.csv",
+  "sensitive_column_count": 1,
+  "sensitive_columns": [
+    {
+      "column_name": "subject_email",
+      "privacy_class": "sensitive_personal",
+      "sensitivity_evidence": ["sensitive_column_name", "email_like_values"]
+    }
+  ],
+  "cloud_model_requires_approval": true
+}

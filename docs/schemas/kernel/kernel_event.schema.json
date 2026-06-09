@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/kernel/kernel_event.schema.json",
+  "title": "KernelEvent",
+  "type": "object",
+  "required": ["event_id", "schema_version", "project_id", "sequence", "event_type", "actor", "created_at", "payload", "hash"],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {"type": "string", "minLength": 1},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "project_id": {"type": "string", "minLength": 1},
+    "session_id": {"type": "string"},
+    "task_id": {"type": "string"},
+    "sequence": {"type": "integer", "minimum": 0},
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "session.created",
+        "session.state_changed",
+        "message.user_created",
+        "context.bundle_created",
+        "plan.proposed",
+        "plan.approval_requested",
+        "plan.approval_decided",
+        "model.call_started",
+        "model.call_completed",
+        "model.call_blocked",
+        "model.stream_delta",
+        "model.stream_completed",
+        "tool.call_requested",
+        "permission.requested",
+        "permission.decided",
+        "tool.call_completed",
+        "tool.result_recorded",
+        "patch.proposal_created",
+        "patch.proposal_validated",
+        "patch.applied",
+        "artifact.created",
+        "eval.event",
+        "session.completed",
+        "session.failed",
+        "session.cancelled"
+      ]
+    },
+    "actor": {"type": "string", "enum": ["user", "agent", "runtime", "tool", "model", "research_worker", "policy"]},
+    "created_at": {"type": "string"},
+    "payload": {"type": "object"},
+    "prev_hash": {"type": "string"},
+    "hash": {"type": "string", "minLength": 1}
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://researchcode.local/schemas/kernel/context_bundle.schema.json",
+  "title": "ContextBundle",
+  "type": "object",
+  "required": ["bundle_id", "schema_version", "session_id", "model_profile_id", "purpose", "token_budget", "items", "omitted_items", "privacy_summary"],
+  "additionalProperties": false,
+  "properties": {
+    "bundle_id": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "session_id": {"type": "string"},
+    "model_profile_id": {"type": "string"},
+    "purpose": {"type": "string", "enum": ["planning", "execution", "review", "compaction", "research"]},
+    "token_budget": {"type": "integer", "minimum": 1},
+    "items": {"type": "array", "items": {"$ref": "#/$defs/context_item"}},
+    "omitted_items": {"type": "array", "items": {"type": "object"}},
+    "privacy_summary": {"type": "array", "items": {"type": "string"}},
+    "prefix_hash": {"type": "string"}
+  },
+  "$defs": {
+    "context_item": {
+      "type": "object",
+      "required": ["item_id", "kind", "source_uri", "trust_level", "token_estimate", "privacy_class"],
+      "additionalProperties": false,
+      "properties": {
+        "item_id": {"type": "string"},
+        "kind": {"type": "string", "enum": ["user_task", "system_policy", "repo_map", "file_snippet", "tool_result", "plan", "patch", "memory", "research_profile", "artifact_ref"]},
+        "source_uri": {"type": "string"},
+        "trust_level": {"type": "string", "enum": ["system", "user", "repo", "generated", "tool", "external"]},
+        "content_ref": {"type": "string"},
+        "inline_text": {"type": "string"},
+        "token_estimate": {"type": "integer", "minimum": 0},
+        "privacy_class": {"type": "string", "enum": ["public", "internal", "confidential", "sensitive_personal", "secret"]}
+      }
+    }
+  }
+}
+
