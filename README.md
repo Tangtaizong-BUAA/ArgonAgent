@@ -1,8 +1,8 @@
 # ArgonAgent
 
-一个本地优先的 AI Agent 工作台。
+针对deepseek以及qwen本地模型的深度优化的agent工具
 
-简单说：我想做一个更懂 DeepSeek 和 Qwen 的本地 AI 工作伙伴。它不只是把模型 API
+简单说：我想做一个更懂 DeepSeek-v4 和 Qwen-27B 的本地 AI 工作伙伴。它不只是把模型 API
 接进来聊聊天，而是从运行时、上下文、工具调用、权限、桌面交互到评测体系，一层一层把
 DeepSeek/Qwen 当成一等公民来优化。
 
